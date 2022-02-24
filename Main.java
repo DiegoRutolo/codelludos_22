@@ -1,5 +1,10 @@
+import java.util.ArrayList;
+
 public class Main {
-    public static void main(String[] args) {       
+    ArrayList<Proyecto> proyectos=new ArrayList<Proyecto>();
+    ArrayList<Trabajador> trabajadores=new ArrayList<Trabajador>();
+    
+    public static void main(String[] args) {
         System.out.println("Hola mundo");
     }
 }
