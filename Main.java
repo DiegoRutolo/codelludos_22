@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Hola mundo");
 
-		Lector l = new Lector(CASO_F, trabajadores, proyectos);
+		/*Lector l = new Lector(CASO_F, trabajadores, proyectos);
 		//trabajadores.forEach((n, t) -> System.out.println(t));
 
         //P1
@@ -91,7 +91,10 @@ public class Main {
             System.out.println("La Asignacion 2 es viable");
         }else{
             System.out.println("La Asignacion 2 no es viable");
-        }
+        }*/
+
+        Pruebas p = new Pruebas();
+		p.PruebasAsignacion();
     }
 
 	public static HashMap<String, Trabajador> getTrabajadoresBySill(Skill skill) {

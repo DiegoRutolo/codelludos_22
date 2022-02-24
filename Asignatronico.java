@@ -21,6 +21,10 @@ public class Asignatronico {
     public Asignatronico(ArrayList<Proyecto> proyectosPendientes, ArrayList<Trabajador> trabajadoresLibres) {
         this.proyectosPendientes = proyectosPendientes;
         this.trabajadoresLibres = trabajadoresLibres;
+        this.trabajadoresAsignados = new ArrayList<>();
+        this.proyectosAsignados = new ArrayList<>();
+        this.asignaciones = new ArrayList<>();
+
     }
 
     public Asignatronico(ArrayList<Proyecto> proyectosPendientes, ArrayList<Proyecto> proyectosAsignados, ArrayList<Trabajador> trabajadoresLibres, ArrayList<Trabajador> trabajadoresAsignados, Proyecto firstToComplete) {
@@ -70,7 +74,7 @@ public class Asignatronico {
             for(Skill rol : currentProject.roles) {
                 Trabajador bestWorker = null;
                 for(int indexTrabajador = 0 ; indexTrabajador < trabajadoresLibres.size(); indexTrabajador++) {
-                    Trabajador currentWorker = trabajadoresAsignados.get(indexTrabajador);
+                    Trabajador currentWorker = trabajadoresLibres.get(indexTrabajador);
                     if(currentWorker.getSkillNames().contains(rol.nombre)) {
                         if(currentWorker.getLevelForSkill(rol.nombre) >= rol.nivel) {
                             if(bestWorker == null) {
