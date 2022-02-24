@@ -27,6 +27,7 @@ public class Main {
 		Asignatronico prueba = new Asignatronico(proyectosA, trabajadoresA);
         prueba.assignProjects();
 
+        /*
 		for(Asignacion a: prueba.asignaciones)
         {
             if(a.esViable())
@@ -34,6 +35,7 @@ public class Main {
             else
                 System.out.println("Malarda crack");
         }
+        */
 
 		OutputPrinter o = new OutputPrinter();
 		o.printResult(prueba.asignaciones);
