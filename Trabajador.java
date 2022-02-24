@@ -40,5 +40,6 @@ public class Trabajador
 
     public Integer getLevelForSkill(String skillName) {
 //		for()
+		return null;
 	}
 }
