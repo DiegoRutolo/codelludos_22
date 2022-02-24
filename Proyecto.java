@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-import javax.sound.sampled.Port;
-
 public class Proyecto implements Comparable<Proyecto> {
     public String nombre;
     public int diasNecesarios;
