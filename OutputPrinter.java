@@ -24,13 +24,13 @@ public class OutputPrinter {
     }
 
 
-    public void printResult(ArrayList<Result> resultados) {
+    public void printResult(ArrayList<Asignacion> resultados) {
         if(outputFile == null || outputWriter == null) {
             this.initialize();
         }
         try {
             outputWriter.write(((Integer)resultados.size()).toString() + "\n");
-            for (Result resultado : resultados) {
+            for (Asignacion resultado : resultados) {
                 outputWriter.write(resultado.proyecto.nombre + "\n");
                 for(int i = 0; i < resultado.trabajadores.size(); i++) {
                     Trabajador trabajador = resultado.trabajadores.get(i);
