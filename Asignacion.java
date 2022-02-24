@@ -1,14 +1,20 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Asignacion {
     public Proyecto proyecto;
     public ArrayList<Trabajador> trabajadores;
+
+    public Asignacion(){
+        trabajadores = new ArrayList<Trabajador>();
+    }
 
     public boolean esViable(){
         ArrayList<Skill> roles=proyecto.roles;
         ArrayList<Skill> skills=new ArrayList<Skill>();
 
         if(roles.size() != trabajadores.size()){
+            System.out.println("Error: Roles y trabajadores difieren");
             return false;
         }
 
@@ -21,10 +27,17 @@ public class Asignacion {
             }
         }
 
+        System.out.println("Lista de skills:");
+        System.out.println(skills);
+
         int matchingSkills=0;   //Skills cumplidas
         for (int i=0;i<tamano;i++){
             Skill rol=roles.get(i);
             Trabajador t=trabajadores.get(i);
+            System.out.println("Rol y Trabajador:");
+            System.out.println(rol);
+            System.out.println(t);
+
             boolean matched=false;
             for (Skill s : t.skills){
                 if (s.nombre.equals(rol.nombre)){

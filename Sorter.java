@@ -6,7 +6,9 @@ import java.util.Comparator;
 
 public class Sorter {
 
-    public void sortProject(ArrayList<Proyecto> projects) {
+    public ArrayList<Proyecto> sortProject(ArrayList<Proyecto> projects) {
         Collections.sort(projects);
+
+        return projects;
     }
 }
