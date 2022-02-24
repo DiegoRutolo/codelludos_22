@@ -8,6 +8,7 @@ public class Trabajador
 	public Trabajador(String nombre)
 	{
 		this.nombre = nombre;
+        skills=new ArrayList<Skill>();
 	}
 
 	@Override

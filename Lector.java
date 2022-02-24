@@ -39,7 +39,6 @@ public class Lector {
 				int nRoles = sc.nextInt();
 
 				Proyecto p  = new Proyecto(nomProy, nDias, puntuacion, limite);
-				p.roles = new ArrayList<>();
 				for (int j = 0; j < nRoles; j++) {
 					String nomRol = sc.next();
 					int nivRol = sc.nextInt();

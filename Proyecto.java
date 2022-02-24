@@ -15,6 +15,7 @@ public class Proyecto implements Comparable<Proyecto> {
 		this.puntuacion = puntuacion;
 		this.diaLimite = diaLimite;
 		this.ratio = puntuacion/diasNecesarios;
+        this.roles = new ArrayList<Skill>();
 	}
 
 	/*public int compareTo(Proyecto other) {
