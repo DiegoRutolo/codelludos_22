@@ -39,7 +39,12 @@ public class Trabajador
     }
 
     public Integer getLevelForSkill(String skillName) {
-//		for()
-		return null;
+		for(Skill skill : this.skills) {
+			if(skill.nombre.equals(skillName)) {
+				return skill.nivel;
+			}
+		}
+		
+		return 0;
 	}
 }
