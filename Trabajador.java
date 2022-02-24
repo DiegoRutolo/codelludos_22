@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class Trabajador 
 {
-    public String Nombre;
-    public ArrayList<Skill> Skills;
+    public String nombre;
+    public ArrayList<Skill> skills;
 
     public Trabajador(String nombre)
     {
-        this.Nombre = nombre;
+        this.nombre = nombre;
     }
 }
