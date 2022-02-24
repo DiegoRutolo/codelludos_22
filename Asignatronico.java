@@ -36,11 +36,51 @@ public class Asignatronico {
     }
 
     public void assignProjects() {
-        asignRoundOfProjects();
-        Integer diaProvisional = getMinimunDurationHigherThan(0);
-        ArrayList<Proyecto> finishedProjects = getProjectsWithDuration(diaProvisional);
-        Integer completedProjects = falseAsignRoundOfProjects((ArrayList<Proyecto>) this.proyectosPendientes.clone(), (ArrayList<Proyecto>)this.proyectosAsignados.clone(), (ArrayList<Trabajador>)this.trabajadoresLibres.clone(), (ArrayList<Trabajador>)this.trabajadoresAsignados.clone(), (ArrayList<Asignacion>)this.asignaciones.clone());
+        Integer currentDay = 0;
+        do {
+            asignRoundOfProjects();
+//            Integer maxDia = getMaximumDurationHigherThan(currentDay);
+            this.trabajadoresLibres.addAll(trabajadoresAsignados);
+            this.trabajadoresAsignados = new ArrayList<>();
+//            currentDay = maxDia;
+        } while(this.proyectosPendientes.size() > 0);
 
+
+
+
+//        Integer diaProvisional = getMinimunDurationHigherThan(0);
+//        ArrayList<Asignacion> finishedProjects = getProjectsWithDuration(diaProvisional);
+//        ArrayList<Trabajador> provTrabajadoresLibres = (ArrayList<Trabajador>) this.trabajadoresLibres.clone();
+//        for(Asignacion asignacion : finishedProjects) {
+//            provTrabajadoresLibres.addAll(asignacion.trabajadores);
+//        }
+//        ArrayList<Trabajador> provTrabajadoresAsignados = (ArrayList<Trabajador>) this.trabajadoresAsignados.clone();
+//        for(Asignacion asignacion : finishedProjects) {
+//            provTrabajadoresAsignados.removeAll(asignacion.trabajadores);
+//        }
+//        Integer completedProjects = falseAsignRoundOfProjects((ArrayList<Proyecto>) this.proyectosPendientes.clone(), (ArrayList<Proyecto>)this.proyectosAsignados.clone(), provTrabajadoresLibres, provTrabajadoresAsignados, (ArrayList<Asignacion>)this.asignaciones.clone());
+//        if(completedProjects > 0) {
+//            asignRoundOfProjects();
+//        } else {
+//            Integer secondDiaProvisional = getMinimunDurationHigherThan(diaProvisional);
+//            ArrayList<Asignacion> secondFinishedProjects = getProjectsWithDuration(secondDiaProvisional);
+//        }
+    }
+
+    public Integer checkPossibleCompletedProjects() {
+        Integer diaProvisional = getMinimunDurationHigherThan(0);
+        ArrayList<Asignacion> finishedProjects = getProjectsWithDuration(diaProvisional);
+        ArrayList<Trabajador> provTrabajadoresLibres = (ArrayList<Trabajador>) this.trabajadoresLibres.clone();
+        for(Asignacion asignacion : finishedProjects) {
+            provTrabajadoresLibres.addAll(asignacion.trabajadores);
+        }
+        ArrayList<Trabajador> provTrabajadoresAsignados = (ArrayList<Trabajador>) this.trabajadoresAsignados.clone();
+        for(Asignacion asignacion : finishedProjects) {
+            provTrabajadoresAsignados.removeAll(asignacion.trabajadores);
+        }
+        Integer completedProjects = falseAsignRoundOfProjects((ArrayList<Proyecto>) this.proyectosPendientes.clone(), (ArrayList<Proyecto>)this.proyectosAsignados.clone(), provTrabajadoresLibres, provTrabajadoresAsignados, (ArrayList<Asignacion>)this.asignaciones.clone());
+
+        return completedProjects;
     }
 
     public Integer getMinimunDurationHigherThan(int threshold) {
@@ -56,11 +96,24 @@ public class Asignatronico {
         return minimunDuration;
     }
 
-    public ArrayList<Proyecto> getProjectsWithDuration(int duration) {
-        ArrayList<Proyecto> projects = new ArrayList<>();
+    public Integer getMaximumDurationHigherThan(int threshold) {
+        Integer maximumDuration = Integer.MAX_VALUE;
         for(Asignacion asignacion : asignaciones) {
-            if(asignacion.proyecto.diasNecesarios == duration)  {
-                projects.add(asignacion.proyecto);
+            // Clear all pending projects that has been asigned
+            proyectosPendientes.remove(asignacion.proyecto);
+            if(asignacion.proyecto.diasNecesarios > maximumDuration) {
+                maximumDuration = asignacion.proyecto.diasNecesarios;
+            }
+        }
+
+        return maximumDuration;
+    }
+
+    public ArrayList<Asignacion> getProjectsWithDuration(int duration) {
+        ArrayList<Asignacion> projects = new ArrayList<>();
+        for(Asignacion asignacion : asignaciones) {
+            if(asignacion.proyecto.diasNecesarios <= duration)  {
+                projects.add(asignacion);
             }
         }
 
