@@ -30,17 +30,17 @@ public class OutputPrinter {
 
 
     public void printResult(ArrayList<Result> resultados) {
-        for (Result resultado : resultados) {
-            try {
-                myWriter.write("Files in Java might be tricky, but it is fun enough!");
-                System.out.println("Successfully wrote to the file.");
-            } catch (IOException e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
-            }
-        }
+        try {
+            myWriter.write(((Integer)resultados.size()).toString());
+            for (Result resultado : resultados) {
 
-        myWriter.close();
+                System.out.println("Successfully wrote to the file.");
+            }
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
 
