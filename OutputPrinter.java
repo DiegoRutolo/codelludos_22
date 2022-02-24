@@ -1,6 +1,4 @@
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,20 +6,17 @@ import java.util.ArrayList;
 public class OutputPrinter {
 
     public File outputFile;
-    FileWriter myWriter;
+    FileWriter outputWriter;
 
     public void initialize() {
         try {
-//            outputFile = new File("C:\\demo\\demofile.txt");
-//            outputStream = new FileOutputStream(outputFile);
-
             outputFile = new File("filename.txt");
             if (outputFile.createNewFile()) {
                 System.out.println("File created: " + outputFile.getName());
             } else {
                 System.out.println("File already exists.");
             }
-            myWriter = new FileWriter("filename.txt");
+            outputWriter = new FileWriter("filename.txt");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -29,19 +24,27 @@ public class OutputPrinter {
     }
 
 
-    public void printResult(ArrayList<Result> resultados) {
+    public void printResult(ArrayList<Asignacion> resultados) {
+        if(outputFile == null || outputWriter == null) {
+            this.initialize();
+        }
         try {
-            myWriter.write(((Integer)resultados.size()).toString());
-            for (Result resultado : resultados) {
-
-                System.out.println("Successfully wrote to the file.");
+            outputWriter.write(((Integer)resultados.size()).toString() + "\n");
+            for (Asignacion resultado : resultados) {
+                outputWriter.write(resultado.proyecto.nombre + "\n");
+                for(int i = 0; i < resultado.trabajadores.size(); i++) {
+                    Trabajador trabajador = resultado.trabajadores.get(i);
+                    if(i < resultado.trabajadores.size() -1) {
+                        outputWriter.write(trabajador.nombre + " ");
+                    } else {
+                        outputWriter.write(trabajador.nombre + "\n");
+                    }
+                }
             }
-            myWriter.close();
+            outputWriter.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
-
-
 }
