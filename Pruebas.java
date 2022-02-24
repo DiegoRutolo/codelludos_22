@@ -148,7 +148,16 @@ public class Pruebas
     {
         Asignatronico prueba = new Asignatronico(proyectos, trabajadores);
 
-        prueba.assignProjects();
+        prueba.asignRoundOfProjects();
+        prueba.asignRoundOfProjects();
+        prueba.asignRoundOfProjects();
+        for(Asignacion a: prueba.asignaciones)
+        {
+            if(a.esViable())
+                System.out.println("Buenarda crack");
+            else
+                System.out.println("Malarda crack");
+        }
     }
 
     

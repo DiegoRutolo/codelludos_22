@@ -21,11 +21,22 @@ public class Main {
 		Lector l = new Lector(CASO_F, trabajadores, proyectos);
 		//trabajadores.forEach((n, t) -> System.out.println(t));
 
+		ArrayList<Proyecto> proyectosA = new ArrayList<>(proyectos.values());
+		ArrayList<Trabajador> trabajadoresA = new ArrayList<>(trabajadores.values());
 
-        Pruebas.PruebaEsValido();
+		Asignatronico prueba = new Asignatronico(proyectosA, trabajadoresA);
+        prueba.asignRoundOfProjects();
 
-        Pruebas p = new Pruebas();
-		p.PruebasAsignacion();
+		for(Asignacion a: prueba.asignaciones)
+        {
+            if(a.esViable())
+                System.out.println("Buenarda crack");
+            else
+                System.out.println("Malarda crack");
+        }
+
+		OutputPrinter o = new OutputPrinter();
+		o.printResult(prueba.asignaciones);
     }
 
 	public static HashMap<String, Trabajador> getTrabajadoresBySkill(Skill skill) {
