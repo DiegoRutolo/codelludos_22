@@ -1,7 +1,8 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Result {
     
     public Proyecto proyecto;
-    public HashMap<Skill, Trabajador> asignaciones;
+    public ArrayList<Trabajador> trabajadores;
 }
