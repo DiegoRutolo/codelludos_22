@@ -37,4 +37,8 @@ public class Trabajador
 
         return skillNames;
     }
+
+    public Integer getLevelForSkill(String skillName) {
+//		for()
+	}
 }
