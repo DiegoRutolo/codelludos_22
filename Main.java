@@ -24,17 +24,31 @@ public class Main {
 		// Skill s2 = new Skill("Haskell", 3);
 		// Skill s3 = new Skill("HTML-py", 1);
 
-		for (Entry<String, Trabajador> e : Main.getTrabajadoresBySill(s1).entrySet()) {
+		for (Entry<String, Trabajador> e : Main.getTrabajadoresBySkill(s1).entrySet()) {
 			System.out.println(e.getValue());
 		}
 	}
 
-	public static HashMap<String, Trabajador> getTrabajadoresBySill(Skill skill) {
+	public static HashMap<String, Trabajador> getTrabajadoresBySkill(Skill skill) {
 		HashMap<String, Trabajador> ts = new HashMap<>();
 
 		for (Entry<String, Trabajador> e : trabajadores.entrySet()) {
 			for (Skill s : e.getValue().skills) {
 				if (skill.equals(s))
+					ts.put(e.getKey(), e.getValue());
+			}
+			
+		}
+		
+		return ts;
+	}
+
+	public static HashMap<String, Trabajador> getTrabajadoresBySkillSinNivel(Skill skill) {
+		HashMap<String, Trabajador> ts = new HashMap<>();
+
+		for (Entry<String, Trabajador> e : trabajadores.entrySet()) {
+			for (Skill s : e.getValue().skills) {
+				if (skill.nombre.contentEquals(s.nombre))
 					ts.put(e.getKey(), e.getValue());
 			}
 			
