@@ -6,6 +6,7 @@ public class Proyecto implements Comparable<Proyecto> {
 	public int puntuacion;
 	public int diaLimite;
 	public ArrayList<Skill> roles;
+	private float ratio;
 
 	public Proyecto(String nombre, Integer diasNecesarios, Integer puntuacion, Integer diaLimite)
 	{
@@ -13,6 +14,7 @@ public class Proyecto implements Comparable<Proyecto> {
 		this.diasNecesarios = diasNecesarios;
 		this.puntuacion = puntuacion;
 		this.diaLimite = diaLimite;
+		this.ratio = puntuacion/diaLimite;
 	}
 
 	/*public int compareTo(Proyecto other) {
@@ -24,11 +26,16 @@ public class Proyecto implements Comparable<Proyecto> {
 	}*/
 
 	public int compareTo(Proyecto other) {
-		if((this.getPuntuacion()/this.getDiasNecesarios()) > (other.getPuntuacion()/this.getDiasNecesarios()))
+		if(this.getRatio() > other.getRatio())
 			return 1;
-		else if ((this.getPuntuacion()/this.getDiasNecesarios()) == (other.getPuntuacion()/this.getDiasNecesarios()))
+		else if (this.getRatio() == other.getRatio())
 			return 0 ;
 		return -1 ;
+	}
+
+	public float getRatio()
+	{
+		return this.ratio;
 	}
 
 	public String getNombre() {
