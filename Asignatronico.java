@@ -18,6 +18,11 @@ public class Asignatronico {
         this.asignaciones = new ArrayList<>();
     }
 
+    public Asignatronico(ArrayList<Proyecto> proyectosPendientes, ArrayList<Trabajador> trabajadoresLibres) {
+        this.proyectosPendientes = proyectosPendientes;
+        this.trabajadoresLibres = trabajadoresLibres;
+    }
+
     public Asignatronico(ArrayList<Proyecto> proyectosPendientes, ArrayList<Proyecto> proyectosAsignados, ArrayList<Trabajador> trabajadoresLibres, ArrayList<Trabajador> trabajadoresAsignados, Proyecto firstToComplete) {
         this.proyectosPendientes = proyectosPendientes;
         this.proyectosAsignados = proyectosAsignados;
@@ -25,8 +30,39 @@ public class Asignatronico {
         this.trabajadoresAsignados = trabajadoresAsignados;
         this.firstToComplete = firstToComplete;
     }
-    
-    public void asignProjects() {
+
+    public void assignProjects() {
+        asignRoundOfProjects();
+        Integer diaProvisional = getMinimunDurationHigherThan(0);
+        ArrayList<Proyecto> finishedProjects = getProjectsWithDuration(diaProvisional);
+    }
+
+    public Integer getMinimunDurationHigherThan(int threshold) {
+        Integer minimunDuration = Integer.MAX_VALUE;
+        for(Asignacion asignacion : asignaciones) {
+            // Clear all pending projects that has been asigned
+            proyectosPendientes.remove(asignacion.proyecto);
+            if(asignacion.proyecto.diasNecesarios < minimunDuration) {
+                minimunDuration = asignacion.proyecto.diasNecesarios;
+            }
+        }
+
+        return minimunDuration;
+    }
+
+    public ArrayList<Proyecto> getProjectsWithDuration(int duration) {
+        ArrayList<Proyecto> projects = new ArrayList<>();
+        for(Asignacion asignacion : asignaciones) {
+            if(asignacion.proyecto.diasNecesarios == duration)  {
+                projects.add(asignacion.proyecto);
+            }
+        }
+
+        return projects;
+    }
+
+    public void asignRoundOfProjects() {
+        Integer numberOfAsignedProjects = 0;
         for(int indexProyecto = 0 ; indexProyecto < proyectosPendientes.size(); indexProyecto++) {
             Proyecto currentProject = proyectosPendientes.get(indexProyecto);
             Asignacion provAsignacion = new Asignacion();
@@ -63,11 +99,5 @@ public class Asignatronico {
                 trabajadoresAsignados = new ArrayList<>();
             }
         }
-
-        for(Asignacion asignacion : asignaciones) {
-            // Clear all pending projects that has been asigned
-            proyectosPendientes.remove(asignacion.proyecto);
-        }
     }
-
 }

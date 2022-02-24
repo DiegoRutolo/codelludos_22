@@ -13,4 +13,14 @@ public class Skill {
 	public String toString() {
 		return String.format("%s %d", nombre, nivel);
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Skill)) {
+			return false;
+		}
+		
+		Skill t = (Skill) obj;
+		return nombre.contentEquals(t.nombre) && nivel == t.nivel;
+	}
 }
