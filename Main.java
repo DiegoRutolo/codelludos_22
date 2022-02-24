@@ -1,8 +1,8 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main {
-    public static ArrayList<Proyecto> proyectos=new ArrayList<Proyecto>();
-    public static ArrayList<Trabajador> trabajadores=new ArrayList<Trabajador>();
+    public static HashMap<String, Proyecto> proyectos=new HashMap<String, Proyecto>();
+    public static HashMap<String, Trabajador> trabajadores=new HashMap<String, Trabajador>();
     
     public static void main(String[] args) {
         System.out.println("Hola mundo");
