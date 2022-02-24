@@ -7,16 +7,17 @@ public class OutputPrinter {
 
     public File outputFile;
     FileWriter outputWriter;
+    public static String filename = "filename.txt";
 
     private void initialize() {
         try {
-            outputFile = new File("filename.txt");
+            outputFile = new File(filename);
             if (outputFile.createNewFile()) {
                 System.out.println("File created: " + outputFile.getName());
             } else {
                 System.out.println("File already exists.");
             }
-            outputWriter = new FileWriter("filename.txt");
+            outputWriter = new FileWriter(filename);
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();

@@ -28,12 +28,26 @@ public class Main {
 		p.PruebasAsignacion();
     }
 
-	public static HashMap<String, Trabajador> getTrabajadoresBySill(Skill skill) {
+	public static HashMap<String, Trabajador> getTrabajadoresBySkill(Skill skill) {
 		HashMap<String, Trabajador> ts = new HashMap<>();
 
 		for (Entry<String, Trabajador> e : trabajadores.entrySet()) {
 			for (Skill s : e.getValue().skills) {
 				if (skill.equals(s))
+					ts.put(e.getKey(), e.getValue());
+			}
+			
+		}
+		
+		return ts;
+	}
+
+	public static HashMap<String, Trabajador> getTrabajadoresBySkillSinNivel(Skill skill) {
+		HashMap<String, Trabajador> ts = new HashMap<>();
+
+		for (Entry<String, Trabajador> e : trabajadores.entrySet()) {
+			for (Skill s : e.getValue().skills) {
+				if (skill.nombre.contentEquals(s.nombre))
 					ts.put(e.getKey(), e.getValue());
 			}
 			
