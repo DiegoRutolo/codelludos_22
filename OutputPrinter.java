@@ -8,7 +8,7 @@ public class OutputPrinter {
     public File outputFile;
     FileWriter outputWriter;
 
-    public void initialize() {
+    private void initialize() {
         try {
             outputFile = new File("filename.txt");
             if (outputFile.createNewFile()) {
@@ -22,7 +22,6 @@ public class OutputPrinter {
             e.printStackTrace();
         }
     }
-
 
     public void printResult(ArrayList<Asignacion> resultados) {
         if(outputFile == null || outputWriter == null) {

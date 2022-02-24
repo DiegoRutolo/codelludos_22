@@ -28,4 +28,13 @@ public class Trabajador
 
 		return sb.toString();
 	}
+
+    public ArrayList<String> getSkillNames() {
+        ArrayList<String> skillNames = new ArrayList();
+        for(Skill skill : skills) {
+            skillNames.add(skill.nombre);
+        }
+
+        return skillNames;
+    }
 }
