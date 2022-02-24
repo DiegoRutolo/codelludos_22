@@ -22,6 +22,8 @@ public class Trabajador
 			sb.append(s.nivel);
 			sb.append(", ");
 		}
+		sb.deleteCharAt(sb.length() - 1);
+		sb.deleteCharAt(sb.length() - 1);
 		sb.append(")");
 
 		return sb.toString();

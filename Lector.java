@@ -17,8 +17,6 @@ public class Lector {
 			this.numTrabajadores = sc.nextInt();
 			this.numProyectos = sc.nextInt();
 
-			trabajadores = new HashMap<>();
-			//this.trabajadores = trabajadores;
 			for (int i = 0; i < numTrabajadores; i++) {
 				String nombreTrab = sc.next();
 				Trabajador t = new Trabajador(nombreTrab);
@@ -33,8 +31,6 @@ public class Lector {
 				trabajadores.put(nombreTrab, t);
 			}
 
-			proyectos = new HashMap<>();
-			//this.proyectos = proyectos;
 			for (int i = 0; i < numProyectos; i++) {
 				String nomProy = sc.next();
 				int nDias = sc.nextInt();
