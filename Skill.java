@@ -1,11 +1,11 @@
 public class Skill {
-    public String name;
-    public int level;
+    public String nombre;
+    public int nivel;
 
     public Skill(){};
 
-    public Skill(String name, int level){
-        this.name=name;
-        this.level=level;
+    public Skill(String nombre, int nivel){
+        this.nombre=nombre;
+        this.nivel=nivel;
     }
 }
