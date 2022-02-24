@@ -15,10 +15,18 @@ public class Proyecto implements Comparable<Proyecto> {
 		this.diaLimite = diaLimite;
 	}
 
-	public int compareTo(Proyecto other) {
+	/*public int compareTo(Proyecto other) {
 		if(this.getPuntuacion() > other.getPuntuacion())
 			return 1;
 		else if (this.getPuntuacion() == other.getPuntuacion())
+			return 0 ;
+		return -1 ;
+	}*/
+
+	public int compareTo(Proyecto other) {
+		if((this.getPuntuacion()/this.getDiasNecesarios()) > (other.getPuntuacion()/this.getDiasNecesarios()))
+			return 1;
+		else if ((this.getPuntuacion()/this.getDiasNecesarios()) == (other.getPuntuacion()/this.getDiasNecesarios()))
 			return 0 ;
 		return -1 ;
 	}
