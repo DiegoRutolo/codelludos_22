@@ -27,40 +27,29 @@ public class Asignacion {
             }
         }
 
-        System.out.println("Lista de skills:");
-        System.out.println(skills);
-
         int matchingSkills=0;   //Skills cumplidas
         for (int i=0;i<tamano;i++){
             Skill rol=roles.get(i);
             Trabajador t=trabajadores.get(i);
-            System.out.println("Rol y Trabajador:");
-            System.out.println(rol);
-            System.out.println(t);
 
             boolean matched=false;
             for (Skill s : t.skills){
-                System.out.println("Comprobando Skill: "+s);
                 if (s.nombre.equals(rol.nombre)){
                     if(s.nivel >= rol.nivel){
-                        System.out.println("Casito 1");
                         matchingSkills++;
                         matched=true;
                         continue;
                     }else if(s.nivel == (rol.nivel-1)){
-                        System.out.println("Casito 2");
                         boolean mentoring=false;
                         for(Skill m_skill : skills){
                             if(m_skill.nombre.equals(rol.nombre)){
                                 if(m_skill.nivel>=rol.nivel){
-                                    System.out.println("Casito 3");
                                     mentoring=true;
                                 }
                             }
                         }
 
                         if(mentoring){
-                            System.out.println("Casito 4");
                             matchingSkills++;
                             matched=true;
                             continue;
