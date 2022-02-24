@@ -44,7 +44,7 @@ public class Trabajador
 				return skill.nivel;
 			}
 		}
-		
+
 		return 0;
 	}
 }
