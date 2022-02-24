@@ -14,7 +14,7 @@ public class Proyecto implements Comparable<Proyecto> {
 		this.diasNecesarios = diasNecesarios;
 		this.puntuacion = puntuacion;
 		this.diaLimite = diaLimite;
-		this.ratio = puntuacion/diaLimite;
+		this.ratio = puntuacion/diasNecesarios;
 	}
 
 	/*public int compareTo(Proyecto other) {
