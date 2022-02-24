@@ -31,7 +31,7 @@ public class Asignatronico {
                 Trabajador bestWorker = null;
                 for(int indexTrabajador = 0 ; indexTrabajador < trabajadoresLibres.size(); indexTrabajador++) {
                     Trabajador currentWorker = trabajadoresAsignados.get(indexTrabajador);
-                    if(currentWorker.skills)
+//                    if(currentWorker.skills)
                 }
             }
 
