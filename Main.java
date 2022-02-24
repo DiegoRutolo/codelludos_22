@@ -18,14 +18,14 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Hola mundo");
 
-		Lector l = new Lector(CASO_F, trabajadores, proyectos);
+		Lector l = new Lector(CASO_A, trabajadores, proyectos);
 		//trabajadores.forEach((n, t) -> System.out.println(t));
 
 		ArrayList<Proyecto> proyectosA = new ArrayList<>(proyectos.values());
 		ArrayList<Trabajador> trabajadoresA = new ArrayList<>(trabajadores.values());
 
 		Asignatronico prueba = new Asignatronico(proyectosA, trabajadoresA);
-        prueba.asignRoundOfProjects();
+        prueba.assignProjects();
 
 		for(Asignacion a: prueba.asignaciones)
         {
