@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Proyecto 
 {
+<<<<<<< Updated upstream
     public String nombre;
     public int diasNecesarios;
     public int puntuacion;
@@ -15,4 +16,11 @@ public class Proyecto
         this.puntuacion = puntuacion;
         this.diaLimite = diaLimite;
     }
+=======
+    public String Nombre;
+    public Integer DiasNecesarios;
+    public Integer Puntuacion;
+    public Integer DiaLimite;
+    public ArrayList<Skill> Roles;
+>>>>>>> Stashed changes
 }
