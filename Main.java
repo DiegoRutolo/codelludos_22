@@ -1,4 +1,7 @@
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class Main {
 	public static final String CASO_A = "a_an_example.in.txt";
@@ -16,5 +19,11 @@ public class Main {
 
 		Lector l = new Lector(CASO_F, trabajadores, proyectos);
 		trabajadores.forEach((n, t) -> System.out.println(t));
+	}
+
+	public static Map<String, Trabajador> getTrabajadoresBySill(Skill s) {
+		return trabajadores.entrySet().parallelStream()
+				.filter(t -> t.getValue().skills.contains(s))
+				.collect(Collectors.toMap(Entry::getKey, Entry::getValue));
 	}
 }
