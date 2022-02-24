@@ -21,6 +21,10 @@ public class Asignatronico {
     public Asignatronico(ArrayList<Proyecto> proyectosPendientes, ArrayList<Trabajador> trabajadoresLibres) {
         this.proyectosPendientes = proyectosPendientes;
         this.trabajadoresLibres = trabajadoresLibres;
+        this.trabajadoresAsignados = new ArrayList<>();
+        this.proyectosAsignados = new ArrayList<>();
+        this.asignaciones = new ArrayList<>();
+
     }
 
     public Asignatronico(ArrayList<Proyecto> proyectosPendientes, ArrayList<Proyecto> proyectosAsignados, ArrayList<Trabajador> trabajadoresLibres, ArrayList<Trabajador> trabajadoresAsignados, Proyecto firstToComplete) {
@@ -35,6 +39,8 @@ public class Asignatronico {
         asignRoundOfProjects();
         Integer diaProvisional = getMinimunDurationHigherThan(0);
         ArrayList<Proyecto> finishedProjects = getProjectsWithDuration(diaProvisional);
+        Integer completedProjects = falseAsignRoundOfProjects((ArrayList<Proyecto>) this.proyectosPendientes.clone(), (ArrayList<Proyecto>)this.proyectosAsignados.clone(), (ArrayList<Trabajador>)this.trabajadoresLibres.clone(), (ArrayList<Trabajador>)this.trabajadoresAsignados.clone(), (ArrayList<Asignacion>)this.asignaciones.clone());
+
     }
 
     public Integer getMinimunDurationHigherThan(int threshold) {
@@ -61,7 +67,7 @@ public class Asignatronico {
         return projects;
     }
 
-    public void asignRoundOfProjects() {
+    public Integer asignRoundOfProjects() {
         Integer numberOfAsignedProjects = 0;
         for(int indexProyecto = 0 ; indexProyecto < proyectosPendientes.size(); indexProyecto++) {
             Proyecto currentProject = proyectosPendientes.get(indexProyecto);
@@ -70,7 +76,7 @@ public class Asignatronico {
             for(Skill rol : currentProject.roles) {
                 Trabajador bestWorker = null;
                 for(int indexTrabajador = 0 ; indexTrabajador < trabajadoresLibres.size(); indexTrabajador++) {
-                    Trabajador currentWorker = trabajadoresAsignados.get(indexTrabajador);
+                    Trabajador currentWorker = trabajadoresLibres.get(indexTrabajador);
                     if(currentWorker.getSkillNames().contains(rol.nombre)) {
                         if(currentWorker.getLevelForSkill(rol.nombre) >= rol.nivel) {
                             if(bestWorker == null) {
@@ -91,13 +97,60 @@ public class Asignatronico {
                 // Result is good, set project as asigned
                 asignaciones.add(provAsignacion);
                 proyectosAsignados.add(currentProject);
+                proyectosPendientes.remove(currentProject);
+                numberOfAsignedProjects++;
             } else {
                 // Return workers to free state and clean the asigned array
-                for(Trabajador trabajador : trabajadoresAsignados) {
-                    trabajadoresLibres.add(trabajador);
-                }
-                trabajadoresAsignados = new ArrayList<>();
+                trabajadoresAsignados.removeAll(provAsignacion.trabajadores);
+                trabajadoresLibres.addAll(provAsignacion.trabajadores);
             }
         }
+
+        return numberOfAsignedProjects;
+    }
+
+    public Integer falseAsignRoundOfProjects(ArrayList<Proyecto> proyectosPendientes, ArrayList<Proyecto> proyectosAsignados,
+                                             ArrayList<Trabajador> trabajadoresLibres, ArrayList<Trabajador> trabajadoresAsignados,
+                                             ArrayList<Asignacion> asignaciones) {
+        Integer numberOfAsignedProjects = 0;
+        for(int indexProyecto = 0 ; indexProyecto < proyectosPendientes.size(); indexProyecto++) {
+            Proyecto currentProject = proyectosPendientes.get(indexProyecto);
+            Asignacion provAsignacion = new Asignacion();
+            provAsignacion.proyecto = currentProject;
+            for(Skill rol : currentProject.roles) {
+                Trabajador bestWorker = null;
+                for(int indexTrabajador = 0 ; indexTrabajador < trabajadoresLibres.size(); indexTrabajador++) {
+                    Trabajador currentWorker = trabajadoresLibres.get(indexTrabajador);
+                    if(currentWorker.getSkillNames().contains(rol.nombre)) {
+                        if(currentWorker.getLevelForSkill(rol.nombre) >= rol.nivel) {
+                            if(bestWorker == null) {
+                                bestWorker = currentWorker;
+                            } else if (currentWorker.getLevelForSkill(rol.nombre) < bestWorker.getLevelForSkill(rol.nombre)) {
+                                bestWorker = currentWorker;
+                            }
+                        }
+                    }
+                }
+                if(bestWorker != null) {
+                    provAsignacion.trabajadores.add(bestWorker);
+                    trabajadoresLibres.remove(bestWorker);
+                    trabajadoresAsignados.add(bestWorker);
+                }
+            }
+            if(provAsignacion.trabajadores.size() == currentProject.roles.size()) {
+                // Result is good, set project as asigned
+                asignaciones.add(provAsignacion);
+                proyectosAsignados.add(currentProject);
+                proyectosPendientes.remove(currentProject);
+                numberOfAsignedProjects++;
+            } else {
+                // Return workers to free state and clean the asigned array
+                // TODO: Do not erase all asigned, only the current
+                trabajadoresAsignados.removeAll(provAsignacion.trabajadores);
+                trabajadoresLibres.addAll(provAsignacion.trabajadores);
+            }
+        }
+
+        return numberOfAsignedProjects;
     }
 }
