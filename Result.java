@@ -2,6 +2,6 @@ import java.util.HashMap;
 
 public class Result {
     
-    public Proyecto project;
+    public Proyecto proyecto;
     public HashMap<Skill, Trabajador> asignaciones;
 }
