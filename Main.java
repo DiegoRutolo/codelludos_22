@@ -5,12 +5,13 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 public class Main {
-    public static final String CASO_A = "a_an_example.in.txt";
-	public static final String CASO_B = "b_better_start_small.in.txt";
-	public static final String CASO_C = "c_collaboration.in.txt";
-	public static final String CASO_D = "d_dense_schedule.in.txt";
-	public static final String CASO_E = "e_exceptional_skills.in.txt";
-	public static final String CASO_F = "f_find_great_mentors.in.txt";
+	
+    public static final CASO_STRUCT CASO_A = new CASO_STRUCT("a_an_example.in.txt", "a_an_example.out.txt");
+	public static final CASO_STRUCT CASO_B = new CASO_STRUCT("b_better_start_small.in.txt", "b_better_start_small.out.txt");
+	public static final CASO_STRUCT CASO_C = new CASO_STRUCT("c_collaboration.in.txt", "c_collaboration.out.txt");
+	public static final CASO_STRUCT CASO_D = new CASO_STRUCT("d_dense_schedule.in.txt", "d_dense_schedule.out.txt");
+	public static final CASO_STRUCT CASO_E = new CASO_STRUCT("e_exceptional_skills.in.txt", "e_exceptional_skills.out.txt");
+	public static final CASO_STRUCT CASO_F = new CASO_STRUCT("f_find_great_mentors.in.txt", "f_find_great_mentors.out.txt");
 
     public static HashMap<String, Proyecto> proyectos=new HashMap<String, Proyecto>();
     public static HashMap<String, Trabajador> trabajadores=new HashMap<String, Trabajador>();
@@ -18,7 +19,8 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Hola mundo");
 
-		Lector l = new Lector(CASO_A, trabajadores, proyectos);
+		FileManager fm = new FileManager(CASO_E);
+		fm.readFile();
 		//trabajadores.forEach((n, t) -> System.out.println(t));
 
 		ArrayList<Proyecto> proyectosA = new ArrayList<>(proyectos.values());
@@ -37,9 +39,13 @@ public class Main {
         }
         */
 
-		OutputPrinter o = new OutputPrinter();
-		o.printResult(prueba.asignaciones);
+		fm.writeResult(prueba.asignaciones);
     }
+
+	public static void cleanMemory(){
+		proyectos.clear();
+		trabajadores.clear();
+	}
 
 	public static HashMap<String, Trabajador> getTrabajadoresBySkill(Skill skill) {
 		HashMap<String, Trabajador> ts = new HashMap<>();
